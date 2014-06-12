@@ -25,7 +25,7 @@ if (ignore_file) {
 	for (var i = 0; i < len; i++) {
 		var l = ignore[i].length
 		if (ignore[i].substr(l-5) !== '.html') {
-			ignore_folders.push(new RegExp(ignore[i]))
+			ignore_folders.push(new RegExp('^' + ignore[i]))
 		}
 	}
 }
