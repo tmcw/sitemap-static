@@ -1,59 +1,53 @@
-#!/usr/bin/env node
+'use strict';
+var findit = require('findit');
 
-var findit = require('findit'),
-    argv = require('minimist')(process.argv.slice(2));
+module.exports = function(o, cb) {
+  // accepts
+  // {
+  //   findRoot - string
+  //   ignoreFile - string
+  //   prefix - string
+  // }
+  // cb - function
+  var finder = findit(o.findRoot);
 
-var finder = findit(argv._[0] || '.');
-var prefix = argv.prefix;
-if (prefix === undefined) {
-    process.stdout.write('Error: Missing Prefix.\n')
-    process.stdout.write('  Eg: sitemap-static --prefix=http://www.domain.com\n')
-    process.exit()
-}
+  var ignore_file = o.ignoreFile;
+  var ignore = []
+  var ignore_folders = []
+  var ret = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
-if (!prefix.match(/\/$/)) prefix += '/'
+  if (ignore_file) {
+      ignore = require(process.cwd() + '/' + ignore_file);
+      var len = ignore.length
+      for (var i = 0; i < len; i++) {
+          var l = ignore[i].length
+          if (ignore[i].substr(l-5) !== '.html') {
+              ignore_folders.push(new RegExp('^' + ignore[i]))
+          }
+      }
+  }
 
-var ignore_file = argv['ignore-file'];
-var ignore = []
-var ignore_folders = []
+  finder.on('file', function(file, stat) {
+      function indent(level) {
+          var space = '    ';
+          var str = '';
+          for (var i = 0; i < level; i++) {
+            str += space;
+          }
+          return str;
+      }
 
-if (ignore_file) {
-    ignore = require(process.cwd() + '/' + ignore_file);
-    var len = ignore.length
-    for (var i = 0; i < len; i++) {
-        var l = ignore[i].length
-        if (ignore[i].substr(l-5) !== '.html') {
-            ignore_folders.push(new RegExp('^' + ignore[i]))
-        }
-    }
-}
+      if (file.indexOf('.html') === -1 ||
+          ignore.indexOf(file) !== -1) return;
+      for (var i = 0; i < ignore_folders.length; i++) {
+          if (file.match(ignore_folders[i])) return;
+      }
 
-process.stdout.write('<?xml version="1.0" encoding="UTF-8"?>\n');
-process.stdout.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n');
+      ret += indent(1) + '<url>\n' + indent(2) + '<loc>' + o.prefix + file +
+        '</loc>\n' + indent(1) + '</url>\n';
+  });
 
-finder.on('file', function(file, stat) {
-
-    function indent(level) {
-        var space = '    ';
-        var str = '';
-        for (var i = 0; i < level; i++) {
-          str += space;
-        }
-        return str;
-    }
-
-    if (file.indexOf('.html') === -1 ||
-        ignore.indexOf(file) !== -1) return;
-    for (var i = 0; i < ignore_folders.length; i++) {
-        if (file.match(ignore_folders[i])) return;
-    }
-    process.stdout.write(indent(1) + '<url>\n');
-    process.stdout.write(indent(2) + '<loc>');
-    process.stdout.write(prefix + file);
-    process.stdout.write('</loc>\n');
-    process.stdout.write(indent(1) + '</url>\n');
-});
-
-finder.on('end', function(file, stat) {
-    process.stdout.write('</urlset>');
-});
+  finder.on('end', function(file, stat) {
+      cb(null, ret + '</urlset>');
+  });
+};

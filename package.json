@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "sitemap-static": "index.js"
+    "sitemap-static": "bin/index.js"
   },
   "repository": {
     "type": "git",
