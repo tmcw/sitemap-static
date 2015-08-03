@@ -1,20 +1,23 @@
 'use strict';
 var findit = require('findit');
 
-module.exports = function(o, cb) {
+module.exports = function(write, o) {
   // accepts
+  //
+  // write - stream writer
   // {
   //   findRoot - string
   //   ignoreFile - string
   //   prefix - string
   // }
-  // cb - function
   var finder = findit(o.findRoot);
 
   var ignore_file = o.ignoreFile;
   var ignore = []
   var ignore_folders = []
-  var ret = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+
+  write('<?xml version="1.0" encoding="UTF-8"?>');
+  write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
 
   if (ignore_file) {
       ignore = require(process.cwd() + '/' + ignore_file);
@@ -43,11 +46,12 @@ module.exports = function(o, cb) {
           if (file.match(ignore_folders[i])) return;
       }
 
-      ret += indent(1) + '<url>\n' + indent(2) + '<loc>' + o.prefix + file +
-        '</loc>\n' + indent(1) + '</url>\n';
+      write(indent(1) + '<url>\n' + indent(2) +
+        '<loc>' + o.prefix + file + '</loc>\n' +
+        indent(1) + '</url>');
   });
 
   finder.on('end', function(file, stat) {
-      cb(null, ret + '</urlset>');
+      write('</urlset>');
   });
 };

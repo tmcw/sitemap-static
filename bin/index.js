@@ -13,15 +13,8 @@ if (prefix === undefined) {
 
 if (!prefix.match(/\/$/)) prefix += '/'
 
-generateSitemap({
+generateSitemap(process.stdout.write, {
     findRoot: argv._[0] || '.',
     ignoreFile: argv['ignore-file'],
     prefix: prefix,
-}, function(err, data) {
-    if(err) {
-        process.stderr.write('Error: failed to generate sitemap');
-        return process.exit()
-    }
-
-    process.stdout.write(data)
 });
