@@ -23,7 +23,7 @@ test('sitemap - two', function(t) {
     t.equal(res, fs.readFileSync('fixtures/two.xml', 'utf8'));
     t.end();
   }), {
-    findRoot: 'fixtures/two'
+    findRoot: 'fixtures/two/'
   });
 });
 
