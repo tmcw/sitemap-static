@@ -1,5 +1,7 @@
 # sitemap-static
 
+[![build status](https://secure.travis-ci.org/tmcw/sitemap-static.png)](http://travis-ci.org/tmcw/sitemap-static)
+
 Make a sitemap for a static website based on files on disk
 
 ## install
