@@ -13,7 +13,7 @@ if (prefix === undefined) {
 
 if (!prefix.match(/\/$/)) prefix += '/'
 
-generateSitemap(process.stdout.write, {
+generateSitemap(process.stdout, {
     findRoot: argv._[0] || '.',
     ignoreFile: argv['ignore-file'],
     prefix: prefix,

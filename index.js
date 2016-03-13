@@ -62,6 +62,5 @@ module.exports = function(stream, o) {
 
   finder.on('end', function() {
       stream.write('</urlset>\n');
-      stream.end();
   });
 };
