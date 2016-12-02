@@ -55,9 +55,11 @@ module.exports = function(stream, o) {
           if (file.match(ignore_folders[i])) return;
       }
 
-      stream.write(indent(1) + '<url>\n' + indent(2) +
-        '<loc>' + path.join(prefix, path.relative(o.findRoot, file)) + '</loc>\n' +
-        indent(1) + '</url>');
+      stream.write(
+        indent(1) + '<url>\n' +
+        indent(2) + '<loc>' + prefix + path.relative(o.findRoot, file) + '</loc>\n' +
+        indent(1) + '</url>'
+      );
 
   });
 
