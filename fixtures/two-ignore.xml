@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">    <url>
-        <loc>fixtures/two/index.html</loc>
+        <loc>http://www.example.com/index.html</loc>
     </url>    <url>
-        <loc>fixtures/two/two.html</loc>
+        <loc>http://www.example.com/two.html</loc>
     </url></urlset>
