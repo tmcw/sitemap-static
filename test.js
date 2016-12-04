@@ -11,7 +11,8 @@ test('sitemap - one', function(t) {
     t.equal(res, fs.readFileSync('fixtures/one.xml', 'utf8'));
     t.end();
   }), {
-    findRoot: 'fixtures/one'
+    findRoot: 'fixtures/one',
+    prefix: 'http://www.example.com/'
   });
 });
 
@@ -23,7 +24,8 @@ test('sitemap - two', function(t) {
     t.equal(res, fs.readFileSync('fixtures/two.xml', 'utf8'));
     t.end();
   }), {
-    findRoot: 'fixtures/two/'
+    findRoot: 'fixtures/two/',
+    prefix: 'http://www.example.com/'
   });
 });
 
@@ -36,6 +38,7 @@ test('sitemap - two - ignore', function(t) {
     t.end();
   }), {
     findRoot: 'fixtures/two',
-    ignoreFile: 'fixtures/ignore.json'
+    ignoreFile: 'fixtures/ignore.json',
+    prefix: 'http://www.example.com/'
   });
 });
