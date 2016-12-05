@@ -29,6 +29,7 @@ module.exports = function(stream, o) {
 
   var prefix = o.prefix || '';
   var ignore_file = o.ignoreFile || '';
+  var pretty = o.pretty || false;
   var ignore = [];
   var ignore_folders = [];
 
@@ -55,9 +56,23 @@ module.exports = function(stream, o) {
           if (file.match(ignore_folders[i])) return;
       }
 
+      var filepath = path.relative(o.findRoot, file);
+
+      if (pretty) {
+        if (path.basename(filepath) === 'index.html') {
+          var dir = path.dirname(filepath);
+          filepath = dir === '.' ? '' : dir;
+        } else {
+          filepath = path.join(
+            path.dirname(filepath),
+            path.basename(filepath, '.html')
+          );
+        }
+      }
+
       stream.write(
         indent(1) + '<url>\n' +
-        indent(2) + '<loc>' + prefix + path.relative(o.findRoot, file) + '</loc>\n' +
+        indent(2) + '<loc>' + prefix + filepath + '</loc>\n' +
         indent(1) + '</url>'
       );
 

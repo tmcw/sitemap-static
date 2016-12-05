@@ -17,4 +17,5 @@ generateSitemap(process.stdout, {
     findRoot: argv._[0] || '.',
     ignoreFile: argv['ignore-file'],
     prefix: prefix,
+    pretty: argv.pretty,
 });

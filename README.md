@@ -23,7 +23,8 @@ var generateSitemap = require('sitemap-static');
 generateSitemap({
     findRoot: '.',
     ignoreFile: '',
-    prefix: 'http://somesi.te/'
+    prefix: 'http://somesi.te/',
+    pretty: false
 }, function(err, data) {
     if(err) {
         return console.error(err);
