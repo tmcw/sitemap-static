@@ -1,7 +1,13 @@
 #!/usr/bin/env node
 
-var argv = require('minimist')(process.argv.slice(2)),
-    generateSitemap = require('../');
+var argv = require('minimist')(
+  process.argv.slice(2),
+  {
+    'boolean': 'pretty'
+  }
+);
+
+var generateSitemap = require('../');
 
 
 var prefix = argv.prefix;
@@ -17,4 +23,5 @@ generateSitemap(process.stdout, {
     findRoot: argv._[0] || '.',
     ignoreFile: argv['ignore-file'],
     prefix: prefix,
+    pretty: argv.pretty,
 });

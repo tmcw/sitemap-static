@@ -23,7 +23,8 @@ var generateSitemap = require('sitemap-static');
 generateSitemap({
     findRoot: '.',
     ignoreFile: '',
-    prefix: 'http://somesi.te/'
+    prefix: 'http://somesi.te/',
+    pretty: false
 }, function(err, data) {
     if(err) {
         return console.error(err);
@@ -49,3 +50,18 @@ Example JSON:
 Example Command:
 
 	sitemap-static --ignore-file=ignore.json --prefix=http://foo.bar/foo/ . > sitemap.xml
+
+## Pretty URLs
+
+If you pass `--pretty` to the CLI (or `pretty: true` to the JS API), `sitemap-static` will output pretty URLs rather than the whole path to each file. For example:
+
+| Not pretty | Pretty |
+| --- | --- |
+| `http://www.example.com/index.html` | `http://www.example.com/` |
+| `http://www.example.com/about.html` | `http://www.example.com/about` |
+| `http://www.example.com/author/index.html` | `http://www.example.com/author` |
+| `http://www.example.com/author/main.html` | `http://www.example.com/author/main` |
+
+Example Command:
+
+	sitemap-static --prefix=http://foo.bar/foo/ --pretty . > sitemap.xml
