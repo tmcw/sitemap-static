@@ -1,6 +1,6 @@
 {
   "name": "sitemap-static",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "generate a sitemap for a static website",
   "main": "index.js",
   "scripts": {
