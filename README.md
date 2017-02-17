@@ -19,8 +19,11 @@ files with `.html` extensions to the sitemap.
 
 ```javascript
 var generateSitemap = require('sitemap-static');
+var fs = require('fs');
 
-generateSitemap({
+var writer = fs.createWriteStream('/path/to/your/sitemap.xml');
+
+generateSitemap(writer, {
     findRoot: '.',
     ignoreFile: '',
     prefix: 'http://somesi.te/',
