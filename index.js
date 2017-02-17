@@ -71,6 +71,7 @@ module.exports = function(stream, o) {
       }
 
       stream.write(
+        '\n' +
         indent(1) + '<url>\n' +
         indent(2) + '<loc>' + prefix + filepath + '</loc>\n' +
         indent(1) + '</url>'
@@ -79,7 +80,7 @@ module.exports = function(stream, o) {
   });
 
   finder.on('end', function() {
-      stream.write('</urlset>\n');
+      stream.write('\n</urlset>\n');
       if (stream !== process.stdout) {
         stream.end();
       }
