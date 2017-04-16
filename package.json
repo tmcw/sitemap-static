@@ -4,7 +4,8 @@
   "description": "generate a sitemap for a static website",
   "main": "index.js",
   "scripts": {
-    "test": "tap --coverage test.js"
+    "test": "tap --coverage test.js",
+    "release": "standard-version"
   },
   "bin": {
     "sitemap-static": "bin/index.js"
@@ -30,6 +31,12 @@
   },
   "devDependencies": {
     "concat-stream": "^1.5.0",
+    "standard-version": "^4.0.0",
     "tap": "^10.3.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
