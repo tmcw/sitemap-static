@@ -29,13 +29,6 @@ generateSitemap(writer, {
     ignoreFile: '',
     prefix: 'http://somesi.te/',
     pretty: false
-}, function(err, data) {
-    if(err) {
-        return console.error(err);
-    }
-
-    // xml sitemap
-    console.log(data);
 })
 ```
 
