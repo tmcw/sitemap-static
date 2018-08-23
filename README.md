@@ -1,6 +1,6 @@
 # sitemap-static
 
-[![build status](https://secure.travis-ci.org/tmcw/sitemap-static.png)](http://travis-ci.org/tmcw/sitemap-static)
+[![CircleCI](https://circleci.com/gh/tmcw/sitemap-static.svg?style=svg)](https://circleci.com/gh/tmcw/sitemap-static)
 [![Greenkeeper badge](https://badges.greenkeeper.io/tmcw/sitemap-static.svg)](https://greenkeeper.io/)
 
 Make a sitemap for a static website based on files on disk
