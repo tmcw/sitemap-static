@@ -1,13 +1,15 @@
 {
   "name": "sitemap-static",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "generate a sitemap for a static website",
   "main": "index.js",
   "scripts": {
     "test": "tap --coverage test.js",
     "release": "standard-version"
   },
-  "files": ["cli.js"],
+  "files": [
+    "cli.js"
+  ],
   "bin": {
     "sitemap-static": "cli.js"
   },
