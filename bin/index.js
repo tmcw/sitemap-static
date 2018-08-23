@@ -6,7 +6,7 @@ const argv = require("minimist")(process.argv.slice(2), {
 
 const generateSitemap = require("../");
 
-const { prefix } = argv;
+let { prefix } = argv;
 
 if (prefix === undefined) {
   process.stdout.write("Error: Missing Prefix.\n");

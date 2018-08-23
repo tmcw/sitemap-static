@@ -7,7 +7,7 @@ const header = `<?xml version="1.0" encoding="UTF-8"?>
 function indent(level) {
   let space = "    ";
   let str = "";
-  for (var i = 0; i < level; i++) {
+  for (let i = 0; i < level; i++) {
     str += space;
   }
   return str;
@@ -27,19 +27,16 @@ module.exports = function(stream, o = {}) {
   const prefix = o.prefix || "";
   const ignore_file = o.ignoreFile || "";
   const pretty = o.pretty || false;
-  const ignore_folders = [];
+  let ignore_folders = [];
   let ignore = [];
 
   stream.write(header);
 
   if (ignore_file) {
     ignore = require(process.cwd() + "/" + ignore_file);
-    for (let i = 0; i < ignore.length; i++) {
-      let l = ignore[i].length;
-      if (ignore[i].substr(l - 5) !== ".html") {
-        ignore_folders.push(new RegExp("^" + ignore[i]));
-      }
-    }
+    ignore_folders = ignore
+      .filter(name => path.extname(name) !== ".html")
+      .map(name => new RegExp("^" + name));
   }
 
   finder.on("file", function(file /*, stat */) {
