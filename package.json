@@ -7,8 +7,9 @@
     "test": "tap --coverage test.js",
     "release": "standard-version"
   },
+  "files": ["cli.js"],
   "bin": {
-    "sitemap-static": "bin/index.js"
+    "sitemap-static": "cli.js"
   },
   "repository": {
     "type": "git",

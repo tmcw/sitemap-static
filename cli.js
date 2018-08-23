@@ -4,7 +4,7 @@ const argv = require("minimist")(process.argv.slice(2), {
   boolean: "pretty"
 });
 
-const generateSitemap = require("../");
+const generateSitemap = require("./");
 
 let { prefix } = argv;
 
