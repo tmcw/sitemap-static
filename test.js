@@ -56,3 +56,18 @@ test('sitemap - three', function(t) {
     pretty: true
   });
 });
+
+test('sitemap - four', function(t) {
+  sitemap(concat(function(res) {
+    if (process.env.UPDATE) {
+      fs.writeFileSync('fixtures/four.xml', res);
+    }
+    t.equal(res, fs.readFileSync('fixtures/four.xml', 'utf8'));
+    t.end();
+  }), {
+    findRoot: 'fixtures/three/',
+    prefix: 'http://www.example.com/',
+    pretty: true,
+    trailingSlash: true
+  });
+});

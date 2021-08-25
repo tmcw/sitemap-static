@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const argv = require("minimist")(process.argv.slice(2), {
-  boolean: "pretty"
+  boolean: "pretty",
+  boolean: "trailing-slash"
 });
 
 const generateSitemap = require("./");
@@ -20,5 +21,6 @@ generateSitemap(process.stdout, {
   findRoot: argv._[0] || ".",
   ignoreFile: argv["ignore-file"],
   prefix: prefix,
-  pretty: argv.pretty
+  pretty: argv.pretty,
+  trailingSlash: argv["trailing-slash"]
 });
