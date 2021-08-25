@@ -28,7 +28,8 @@ generateSitemap(writer, {
     findRoot: '.',
     ignoreFile: '',
     prefix: 'http://somesi.te/',
-    pretty: false
+    pretty: false,
+    trailingSlash: false
 })
 ```
 
@@ -62,3 +63,11 @@ If you pass `--pretty` to the CLI (or `pretty: true` to the JS API), `sitemap-st
 Example Command:
 
 	sitemap-static --prefix=http://foo.bar/foo/ --pretty . > sitemap.xml
+
+## Trailing slashes
+
+If you pass `--trailing-slash` to the CLI (or `trailingSlash: true` to the JS API) _and_ the `pretty` option is true, `sitemap-static` will output URLs with a trailing slash
+
+Example Command:
+
+	sitemap-static --prefix=http://foo.bar/foo/ --pretty --trailing-slash . > sitemap.xml

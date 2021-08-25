@@ -27,6 +27,7 @@ module.exports = function(stream, o = {}) {
   const prefix = o.prefix || "";
   const ignore_file = o.ignoreFile || "";
   const pretty = o.pretty || false;
+  const trailingSlash = o.trailingSlash || false;
   let ignore_folders = [];
   let ignore = [];
 
@@ -56,6 +57,10 @@ module.exports = function(stream, o = {}) {
           path.dirname(filepath),
           path.basename(filepath, ".html")
         );
+      }
+
+      if (trailingSlash && dir !== ".") {
+        filepath = filepath + "/";
       }
     }
 
